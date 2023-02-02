@@ -1,16 +1,12 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using BusinessLogic.Service;
+using DataAccess;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using TrainStationDistance.Model;
 
 namespace TrainStationDistance
 {
@@ -31,6 +27,10 @@ namespace TrainStationDistance
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "TrainStationDistance", Version = "v1" });
             });
+
+            services.AddScoped<IDistanceCalculationService, DistanceCalculationService>();
+            services.AddScoped<ITrainStationRepository, TrainStationRepository>();
+            services.AddTransient<DtoMapper>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

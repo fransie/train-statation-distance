@@ -27,10 +27,10 @@ namespace IntegrationTests
 
         }
 
-        [TestCase("FF", "BLS", 423)]
-        [TestCase("BLS", "FF", 423)]
-        [TestCase("KK", "KB", 25)]
-        public async Task GetDistance_ReturnsCorrectDistance(string from, string to, int expectedDistance)
+        [TestCase("FF", "BLS", "Frankfurt(Main)Hbf", "Berlin Hbf", 423)]
+        [TestCase("BLS", "FF", "Berlin Hbf", "Frankfurt(Main)Hbf", 423)]
+        [TestCase("KK", "KB", "Köln Hbf", "Bonn Hbf", 25)]
+        public async Task GetDistance_ReturnsCorrectDistance(string from, string to, string fromName, string toName, int expectedDistance)
         {
             // given
             const string expectedUnit = "km";
@@ -41,10 +41,10 @@ namespace IntegrationTests
             // then
             response.StatusCode.Should().Be(HttpStatusCode.OK);
 
-            var test = await response.Content.ReadAsStringAsync();
             var distanceDto = JsonSerializer.Deserialize<DistanceCalculationDto>(await response.Content.ReadAsStringAsync(), _options);
-            distanceDto.From.Should().Be(from);
-            distanceDto.To.Should().Be(to);
+            distanceDto.Should().NotBeNull();
+            distanceDto!.From.Should().Be(fromName);
+            distanceDto.To.Should().Be(toName);
             distanceDto.Distance.Should().Be(expectedDistance);
             distanceDto.Unit.Should().Be(expectedUnit);
         }

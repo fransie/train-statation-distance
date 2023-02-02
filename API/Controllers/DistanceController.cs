@@ -9,12 +9,12 @@ namespace TrainStationDistance.Controllers;
 [Route($"api/{ApiVersion}/")]
 public class DistanceController : ControllerBase
 {
-    private readonly DistanceCalculationService _calculationService;
+    private readonly IDistanceCalculationService _calculationService;
     private readonly ILogger<DistanceController> _logger;
     private readonly DtoMapper _dtoMapper;
     private const string ApiVersion = "v1";
 
-    public DistanceController(ILogger<DistanceController> logger, DistanceCalculationService calculationService, DtoMapper dtoMapper)
+    public DistanceController(ILogger<DistanceController> logger, IDistanceCalculationService calculationService, DtoMapper dtoMapper)
     {
         _logger = logger;
         _calculationService = calculationService;
