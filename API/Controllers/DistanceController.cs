@@ -1,19 +1,24 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using BusinessLogic.Service;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using TrainStationDistance.Model;
 
 namespace TrainStationDistance.Controllers;
 
 [ApiController]
-[Route($"api/{API_VERSION}/")]
+[Route($"api/{ApiVersion}/")]
 public class DistanceController : ControllerBase
 {
+    private readonly DistanceCalculationService _calculationService;
     private readonly ILogger<DistanceController> _logger;
-    private const string API_VERSION = "v1";
+    private readonly DtoMapper _dtoMapper;
+    private const string ApiVersion = "v1";
 
-    public DistanceController(ILogger<DistanceController> logger)
+    public DistanceController(ILogger<DistanceController> logger, DistanceCalculationService calculationService, DtoMapper dtoMapper)
     {
         _logger = logger;
+        _calculationService = calculationService;
+        _dtoMapper = dtoMapper;
     }
 
     [HttpGet]
@@ -21,7 +26,7 @@ public class DistanceController : ControllerBase
     public DistanceCalculationDto Get(string from, string to)
     {
         _logger.LogInformation($"Received a GET request to /distance with arguments from: \"{from}\" and to: \"{to}\".");
-        var response = new DistanceCalculationDto { From = from, To = to, Distance = 423, Unit = "km"};
-        return response;
+        var response = _calculationService.CalculateDistance(from, to);
+        return _dtoMapper.MapToDto(response);
     }
 }
