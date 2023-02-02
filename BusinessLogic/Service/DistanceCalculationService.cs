@@ -18,29 +18,24 @@ public class DistanceCalculationService : IDistanceCalculationService
 
     public DistanceCalculation? CalculateDistance(string from, string to)
     {
-        TrainStation fromTrainStation;
-        TrainStation toTrainStation;
         try
         {
-            fromTrainStation = _trainStationRepository.GetByDs100Code(from.ToUpper());
-            toTrainStation = _trainStationRepository.GetByDs100Code(to.ToUpper());
+            var fromTrainStation = _trainStationRepository.GetByDs100Code(from.ToUpper());
+            var toTrainStation = _trainStationRepository.GetByDs100Code(to.ToUpper());
+            var distanceCalculation = new DistanceCalculation
+            {
+                From = fromTrainStation.Name,
+                To = toTrainStation.Name,
+                Distance = CalculateHaversineDistanceInKm(fromTrainStation, toTrainStation),
+                Unit = "km"
+            };
+            return distanceCalculation;
         }
         catch (ArgumentException)
         {
             _logger.LogWarning("Either \"{from}\" or \"{to}\" is an invalid DS100Code.", from.ToUpper(), to.ToUpper());
             return null;
         }
-
-        var distance = CalculateHaversineDistanceInKm(fromTrainStation, toTrainStation);
-
-        var distanceCalculation = new DistanceCalculation
-        {
-            From = fromTrainStation.Name,
-            To = toTrainStation.Name,
-            Distance = distance,
-            Unit = "km"
-        };
-        return distanceCalculation;
     }
 
 
