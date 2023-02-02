@@ -1,6 +1,5 @@
-﻿using System.Web.Http.Description;
-using BusinessLogic.Service;
-using Microsoft.AspNetCore.Http.HttpResults;
+﻿using BusinessLogic.Service;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using TrainStationDistance.Model;
@@ -25,8 +24,8 @@ public class DistanceController : ControllerBase
 
     [HttpGet]
     [Route("distance/{from}/{to}")]
-    [ResponseType(typeof(Ok<DistanceCalculationDto>))]
-    [ResponseType(typeof(NotFound))]
+    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(DistanceCalculationDto))]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
     public ActionResult<DistanceCalculationDto> Get(string from, string to)
     {
         _logger.LogInformation($"Received a GET request to /distance with arguments from: \"{from}\" and to: \"{to}\".");
