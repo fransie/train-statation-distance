@@ -36,7 +36,7 @@ public class DistanceController : ControllerBase
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public ActionResult<DistanceCalculationDto> GetDistance(string from, string to)
     {
-        _logger.LogInformation($"Received a GET request to /distance/{from}/{to}.");
+        _logger.LogInformation("Received a GET request to /distance/{from}/{to}.", from, to);
         var distanceCalculation = _calculationService.CalculateDistance(from, to);
         if (distanceCalculation is null)
         {

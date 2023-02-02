@@ -57,7 +57,7 @@ public class TrainStationRepositoryTests
     }
 
     
-    private ITrainStationRepository CreateSut()
+    private static ITrainStationRepository CreateSut()
     {
         return new TrainStationRepository(Substitute.For<ILogger<ITrainStationRepository>>());
     }

@@ -27,7 +27,7 @@ public class DistanceCalculationService : IDistanceCalculationService
         }
         catch (ArgumentException)
         {
-            _logger.LogWarning($"Either \"{from.ToUpper()}\" or \"{to.ToUpper()}\" is an invalid DS100Code.");
+            _logger.LogWarning("Either \"{from}\" or \"{to}\" is an invalid DS100Code.", from.ToUpper(), to.ToUpper());
             return null;
         }
 

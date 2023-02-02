@@ -68,8 +68,8 @@ public class TrainStationRepository : ITrainStationRepository
     {
         if (trainStationRow is null)
         {
-            _logger.LogError($"Null row while parsing csv file.");
-            throw new MalformedLineException($"Null row while parsing csv file.");
+            _logger.LogError("Null row while parsing csv file.");
+            throw new MalformedLineException("Null row while parsing csv file.");
         }
 
         return new TrainStation
