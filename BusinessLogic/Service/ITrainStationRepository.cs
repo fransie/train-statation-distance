@@ -1,8 +1,7 @@
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using BusinessLogic.Model;
 
-namespace DataAccess;
+namespace BusinessLogic.Service;
 
 public interface ITrainStationRepository
 {
@@ -10,12 +9,12 @@ public interface ITrainStationRepository
     /// Gets all train stations.
     /// </summary>
     /// <returns>Collection of train stations</returns>
-    Task<IReadOnlyCollection<TrainStation>> GetAllAsync();
+    IReadOnlyCollection<TrainStation> GetAll();
 
     /// <summary>
     /// Gets the train stations corresponding to the provided DS100Code.
     /// </summary>
     /// <param name="ds100Code">A short identifier with 2 to 6 characters denoting a train station.</param>
     /// <returns></returns>
-    Task<TrainStation> GetByDs100CodeAsync(string ds100Code);
+    TrainStation GetByDs100Code(string ds100Code);
 }

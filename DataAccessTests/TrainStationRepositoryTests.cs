@@ -1,3 +1,4 @@
+using BusinessLogic.Service;
 using DataAccess;
 using FluentAssertions;
 using Microsoft.Extensions.Logging;
@@ -8,27 +9,22 @@ namespace DataAccessTests;
 
 public class TrainStationRepositoryTests
 {
-    [SetUp]
-    public void Setup()
-    {
-    }
-
     [Test]
-    public async Task GetAllAsync_ReturnsAllTrainStations()
+    public void GetAllAsync_ReturnsAllTrainStations()
     {
         // given
         var sut = CreateSut();
         const int expectedTrainStations = 358;
 
         // when
-        var trainsStations = await sut.GetAllAsync();
+        var trainsStations = sut.GetAll();
         
         // then
         trainsStations.Count.Should().Be(expectedTrainStations);
     }
 
     [Test]
-    public async Task GetByDs100CodeAsync_WithValidCode_ReturnsCorrectTrainStation()
+    public void GetByDs100CodeAsync_WithValidCode_ReturnsCorrectTrainStation()
     {
         // given
         var sut = CreateSut();
@@ -37,7 +33,7 @@ public class TrainStationRepositoryTests
         const double expectedLatitude = 50.107145;
 
         // when
-        var trainsStation = await sut.GetByDs100CodeAsync(dsCode);
+        var trainsStation = sut.GetByDs100Code(dsCode);
         
         // then
         trainsStation.Ds100Code.Should().Be("FF");
@@ -47,22 +43,22 @@ public class TrainStationRepositoryTests
     }
 
     [Test]
-    public async Task GetByDs100CodeAsync_WithInvalidCode_ThrowsArgumentException()
+    public void GetByDs100CodeAsync_WithInvalidCode_ThrowsArgumentException()
     {
         // given
         var sut = CreateSut();
         const string invalidDsCode = "invalid";
 
         // when
-        var trainsStation = () => sut.GetByDs100CodeAsync(invalidDsCode);
+        var trainsStation = () => sut.GetByDs100Code(invalidDsCode);
         
         // then
-        await trainsStation.Should().ThrowAsync<ArgumentException>();
+        trainsStation.Should().Throw<ArgumentException>();
     }
 
     
     private ITrainStationRepository CreateSut()
     {
-        return new TrainStationRepository(Substitute.For<ILogger<TrainStationRepository>>());
+        return new TrainStationRepository(Substitute.For<ILogger<ITrainStationRepository>>());
     }
 }

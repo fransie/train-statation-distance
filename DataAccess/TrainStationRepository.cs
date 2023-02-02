@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using BusinessLogic.Model;
+using BusinessLogic.Service;
 using Microsoft.Extensions.Logging;
 using Microsoft.VisualBasic.FileIO;
 
@@ -19,12 +19,12 @@ public class TrainStationRepository : ITrainStationRepository
         _trainStations = GetTrainStations();
     }
 
-    public Task<IReadOnlyCollection<TrainStation>> GetAllAsync()
+    public IReadOnlyCollection<TrainStation> GetAll()
     {
-        return Task.FromResult(_trainStations);
+        return _trainStations;
     }
 
-    public Task<TrainStation> GetByDs100CodeAsync(string ds100Code)
+    public TrainStation GetByDs100Code(string ds100Code)
     {
         var trainStation = _trainStations.SingleOrDefault(station => station.Ds100Code == ds100Code);
 
@@ -33,7 +33,7 @@ public class TrainStationRepository : ITrainStationRepository
             throw new ArgumentException($"The DS100Code {ds100Code} is invalid.");
         }
 
-        return Task.FromResult(trainStation);
+        return trainStation;
     }
 
     private IReadOnlyCollection<TrainStation> GetTrainStations()
