@@ -18,10 +18,10 @@ public class DistanceController : ControllerBase
 
     [HttpGet]
     [Route("distance/{from}/{to}")]
-    public DistanceDto Get(string from, string to)
+    public DistanceCalculationDto Get(string from, string to)
     {
         _logger.LogInformation($"Received a GET request to /distance with arguments from: \"{from}\" and to: \"{to}\".");
-        var response = new DistanceDto { From = from, To = to, Distance = 423, Unit = "km"};
+        var response = new DistanceCalculationDto { From = from, To = to, Distance = 423, Unit = "km"};
         return response;
     }
 }

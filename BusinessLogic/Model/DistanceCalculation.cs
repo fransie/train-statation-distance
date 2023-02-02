@@ -1,6 +1,6 @@
-namespace TrainStationDistance.Model;
+namespace BusinessLogic.Model;
 
-public record DistanceDto
+public class DistanceCalculation
 {
     public string From { get; init; }
     public string To { get; init; }

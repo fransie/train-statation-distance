@@ -14,7 +14,7 @@ namespace IntegrationTests
     {
         private WebApplicationFactory<Startup> _application;
         private HttpClient _client;
-        private readonly JsonSerializerOptions _options = new JsonSerializerOptions()
+        private readonly JsonSerializerOptions _options = new()
         {
             PropertyNamingPolicy = JsonNamingPolicy.CamelCase   
         };
@@ -42,7 +42,7 @@ namespace IntegrationTests
             response.StatusCode.Should().Be(HttpStatusCode.OK);
 
             var test = await response.Content.ReadAsStringAsync();
-            var distanceDto = JsonSerializer.Deserialize<DistanceDto>(await response.Content.ReadAsStringAsync(), _options);
+            var distanceDto = JsonSerializer.Deserialize<DistanceCalculationDto>(await response.Content.ReadAsStringAsync(), _options);
             distanceDto.From.Should().Be(from);
             distanceDto.To.Should().Be(to);
             distanceDto.Distance.Should().Be(expectedDistance);
@@ -50,13 +50,13 @@ namespace IntegrationTests
         }
         
         [Test]
-        public async Task GetDistance_WithUnknownCode_ReturnsNotFound()
+        public async Task GetDistance_WithInvalidCode_ReturnsNotFound()
         {
             // given
-            const string unknownTrainStation = "HALLO";
+            const string invalidCode = "invalid";
             
             // when
-            var response = await _client.GetAsync($"/api/v1/distance/{unknownTrainStation}/{unknownTrainStation}");
+            var response = await _client.GetAsync($"/api/v1/distance/{invalidCode}/{invalidCode}");
 
             // then
             response.StatusCode.Should().Be(HttpStatusCode.NotFound);
