@@ -41,7 +41,7 @@ public class TrainStationRepository : ITrainStationRepository
         var trainStations = new List<TrainStation>();
 
         using var parser = GetParser();
-        
+
         // skip header line
         parser.ReadLine();
 

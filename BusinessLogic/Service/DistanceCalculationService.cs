@@ -6,8 +6,8 @@ namespace BusinessLogic.Service;
 
 public class DistanceCalculationService : IDistanceCalculationService
 {
-    private readonly ITrainStationRepository _trainStationRepository;
     private readonly ILogger<IDistanceCalculationService> _logger;
+    private readonly ITrainStationRepository _trainStationRepository;
 
     public DistanceCalculationService(ITrainStationRepository trainStationRepository,
         ILogger<IDistanceCalculationService> logger)

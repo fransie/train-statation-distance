@@ -6,7 +6,6 @@ namespace DataAccess;
 
 public static class CsvConfig
 {
-    public static readonly string Directory = GetDirectory();
     public const string FileName = "train_stations.csv";
     public const string Delimiter = ";";
 
@@ -14,6 +13,7 @@ public static class CsvConfig
     public const int NameColumn = 3;
     public const int LongitudeColumn = 5;
     public const int LatitudeColumn = 6;
+    public static readonly string Directory = GetDirectory();
 
     // CallerFilePath gets the path of caller's file, which is this file here. It can only be used
     // as an attribute in a method call.
@@ -24,6 +24,7 @@ public static class CsvConfig
         {
             throw new ArgumentException("CallerFilePath could not be determined.");
         }
+
         return path;
     }
 }

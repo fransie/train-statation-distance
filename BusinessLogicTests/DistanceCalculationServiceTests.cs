@@ -69,6 +69,7 @@ public class DistanceCalculationServiceTests
 
     private IDistanceCalculationService CreateSut()
     {
-        return new DistanceCalculationService(_trainStationRepository, Substitute.For<ILogger<IDistanceCalculationService>>());
+        return new DistanceCalculationService(_trainStationRepository,
+            Substitute.For<ILogger<IDistanceCalculationService>>());
     }
 }

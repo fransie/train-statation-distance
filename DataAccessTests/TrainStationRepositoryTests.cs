@@ -18,7 +18,7 @@ public class TrainStationRepositoryTests
 
         // when
         var trainsStations = sut.GetAll();
-        
+
         // then
         trainsStations.Count.Should().Be(expectedTrainStations);
     }
@@ -34,7 +34,7 @@ public class TrainStationRepositoryTests
 
         // when
         var trainsStation = sut.GetByDs100Code(dsCode);
-        
+
         // then
         trainsStation.Ds100Code.Should().Be("FF");
         trainsStation.Name.Should().Be("Frankfurt(Main)Hbf");
@@ -51,12 +51,12 @@ public class TrainStationRepositoryTests
 
         // when
         var trainsStation = () => sut.GetByDs100Code(invalidDsCode);
-        
+
         // then
         trainsStation.Should().Throw<ArgumentException>();
     }
 
-    
+
     private static ITrainStationRepository CreateSut()
     {
         return new TrainStationRepository(Substitute.For<ILogger<ITrainStationRepository>>());

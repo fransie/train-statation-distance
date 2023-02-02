@@ -1,27 +1,27 @@
 namespace TrainStationDistance.Model;
 
 /// <summary>
-/// Contains the the air-line distance between two German intercity train stations. 
+///     Contains the the air-line distance between two German intercity train stations.
 /// </summary>
 public record DistanceCalculationDto
 {
     /// <summary>
-    /// Start train station.
+    ///     Start train station.
     /// </summary>
     public string From { get; init; } = string.Empty;
-    
+
     /// <summary>
-    /// End train station.
+    ///     End train station.
     /// </summary>
     public string To { get; init; } = string.Empty;
-    
+
     /// <summary>
-    /// Air-line distance between the two train stations.
+    ///     Air-line distance between the two train stations.
     /// </summary>
     public int Distance { get; init; }
-    
+
     /// <summary>
-    /// Unit of the air-line distance.
+    ///     Unit of the air-line distance.
     /// </summary>
     public string Unit { get; init; } = string.Empty;
 }
