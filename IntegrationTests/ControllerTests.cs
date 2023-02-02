@@ -10,10 +10,14 @@ using TrainStationDistance.Model;
 
 namespace IntegrationTests
 {
-    public class IntegrationTests
+    public class ControllerTests
     {
         private WebApplicationFactory<Startup> _application;
         private HttpClient _client;
+        private readonly JsonSerializerOptions _options = new JsonSerializerOptions()
+        {
+            PropertyNamingPolicy = JsonNamingPolicy.CamelCase   
+        };
 
         [OneTimeSetUp]
         public void Setup()
@@ -36,8 +40,9 @@ namespace IntegrationTests
 
             // then
             response.StatusCode.Should().Be(HttpStatusCode.OK);
-            
-            var distanceDto = JsonSerializer.Deserialize<DistanceDto>(await response.Content.ReadAsStreamAsync());
+
+            var test = await response.Content.ReadAsStringAsync();
+            var distanceDto = JsonSerializer.Deserialize<DistanceDto>(await response.Content.ReadAsStringAsync(), _options);
             distanceDto.From.Should().Be(from);
             distanceDto.To.Should().Be(to);
             distanceDto.Distance.Should().Be(expectedDistance);
