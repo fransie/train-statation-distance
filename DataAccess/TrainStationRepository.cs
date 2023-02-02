@@ -48,7 +48,7 @@ public class TrainStationRepository : ITrainStationRepository
         while (!parser.EndOfData)
         {
             var trainStationRow = parser.ReadFields();
-            var trainStation = ParseRow(trainStationRow);
+            var trainStation = ParseRow(trainStationRow!);
             trainStations.Add(trainStation);
         }
 
@@ -74,7 +74,7 @@ public class TrainStationRepository : ITrainStationRepository
 
         return new TrainStation
         {
-            Ds100Code = trainStationRow![CsvConfig.Ds100CodeColumn],
+            Ds100Code = trainStationRow[CsvConfig.Ds100CodeColumn],
             Name = trainStationRow[CsvConfig.NameColumn],
             Longitude = double.Parse(trainStationRow[CsvConfig.LongitudeColumn]),
             Latitude = double.Parse(trainStationRow[CsvConfig.LatitudeColumn])

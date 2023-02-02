@@ -8,12 +8,12 @@ public record DistanceCalculationDto
     /// <summary>
     /// Start train station.
     /// </summary>
-    public string From { get; init; }
+    public string From { get; init; } = string.Empty;
     
     /// <summary>
     /// End train station.
     /// </summary>
-    public string To { get; init; }
+    public string To { get; init; } = string.Empty;
     
     /// <summary>
     /// Air-line distance between the two train stations.
@@ -23,5 +23,5 @@ public record DistanceCalculationDto
     /// <summary>
     /// Unit of the air-line distance.
     /// </summary>
-    public string Unit { get; init; }
+    public string Unit { get; init; } = string.Empty;
 }

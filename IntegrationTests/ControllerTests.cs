@@ -12,20 +12,11 @@ namespace IntegrationTests
 {
     public class ControllerTests
     {
-        private WebApplicationFactory<Startup> _application;
-        private HttpClient _client;
+        private readonly HttpClient _client = new WebApplicationFactory<Startup>().CreateClient();
         private readonly JsonSerializerOptions _options = new()
         {
             PropertyNamingPolicy = JsonNamingPolicy.CamelCase   
         };
-
-        [OneTimeSetUp]
-        public void Setup()
-        {
-            _application = new WebApplicationFactory<Startup>();
-            _client = _application.CreateClient();
-
-        }
 
         [TestCase("FF", "BLS", "Frankfurt(Main)Hbf", "Berlin Hbf", 423)]
         [TestCase("BLS", "FF", "Berlin Hbf", "Frankfurt(Main)Hbf", 423)]
@@ -61,6 +52,5 @@ namespace IntegrationTests
             // then
             response.StatusCode.Should().Be(HttpStatusCode.NotFound);
         }
-
     }
 }

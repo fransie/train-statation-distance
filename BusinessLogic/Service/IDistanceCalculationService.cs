@@ -9,6 +9,6 @@ public interface IDistanceCalculationService
     /// </summary>
     /// <param name="from">Start train station</param>
     /// <param name="to">End train station</param>
-    /// <returns></returns>
-    DistanceCalculation CalculateDistance(string from, string to);
+    /// <returns>The DistanceCalculation or null if one of the argument codes is invalid.</returns>
+    DistanceCalculation? CalculateDistance(string from, string to);
 }

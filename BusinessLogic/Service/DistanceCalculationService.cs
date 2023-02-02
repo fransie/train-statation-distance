@@ -16,7 +16,7 @@ public class DistanceCalculationService : IDistanceCalculationService
         _logger = logger;
     }
 
-    public DistanceCalculation CalculateDistance(string from, string to)
+    public DistanceCalculation? CalculateDistance(string from, string to)
     {
         TrainStation fromTrainStation;
         TrainStation toTrainStation;
@@ -25,7 +25,7 @@ public class DistanceCalculationService : IDistanceCalculationService
             fromTrainStation = _trainStationRepository.GetByDs100Code(from.ToUpper());
             toTrainStation = _trainStationRepository.GetByDs100Code(to.ToUpper());
         }
-        catch (ArgumentException _)
+        catch (ArgumentException)
         {
             _logger.LogWarning($"Either \"{from}\" or \"{to}\" is an invalid DS100Code.");
             return null;
