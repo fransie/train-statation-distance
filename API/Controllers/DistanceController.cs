@@ -22,17 +22,25 @@ public class DistanceController : ControllerBase
         _dtoMapper = dtoMapper;
     }
 
-    [HttpGet]
-    [Route("distance/{from}/{to}")]
+    /// <summary>
+    /// Calculates the air-line distance between two German intercity train stations.
+    /// </summary>
+    /// <param name="from">DS100Code of start train station, e.g. FF.</param>
+    /// <param name="to">DS100Code of end train station, e.g. BLS.</param>
+    /// <returns>Distance calculation.</returns>
+    /// <response code="200">Returns the distance.</response>
+    /// <response code="404">Indicates that one of the DC100Codes is invalid.</response>
+    [HttpGet("distance/{from}/{to}", Name="GetDistance")]
+    [Produces("application/json")]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(DistanceCalculationDto))]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public ActionResult<DistanceCalculationDto> Get(string from, string to)
+    public ActionResult<DistanceCalculationDto> GetDistance(string from, string to)
     {
-        _logger.LogInformation($"Received a GET request to /distance with arguments from: \"{from}\" and to: \"{to}\".");
+        _logger.LogInformation($"Received a GET request to /distance/{from}/{to}.");
         var distanceCalculation = _calculationService.CalculateDistance(from, to);
         if (distanceCalculation is null)
         {
-            return NotFound();
+            return NotFound(new ProblemDetails{Detail = "One or both of the DS100Codes are invalid."});
         }
         return Ok(_dtoMapper.MapToDto(distanceCalculation));
     }

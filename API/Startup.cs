@@ -1,3 +1,6 @@
+using System;
+using System.IO;
+using System.Reflection;
 using BusinessLogic.Service;
 using DataAccess;
 using Microsoft.AspNetCore.Builder;
@@ -23,9 +26,17 @@ namespace TrainStationDistance
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            services.AddSwaggerGen(c =>
+            services.AddSwaggerGen(options =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "TrainStationDistance", Version = "v1" });
+                options.SwaggerDoc("v1", new OpenApiInfo
+                {
+                    Title = "TrainStationDistance",
+                    Version = "v1",
+                    Description =
+                        "An ASP.NET Core Web API for calculating the air-line distance between German intercity train stations.",
+                });
+                var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
             });
 
             services.AddScoped<IDistanceCalculationService, DistanceCalculationService>();
