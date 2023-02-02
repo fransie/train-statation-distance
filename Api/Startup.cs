@@ -33,7 +33,7 @@ public class Startup
                 Title = "TrainStationDistance",
                 Version = "v1",
                 Description =
-                    "An ASP.NET Core Web API for calculating the air-line distance between German intercity train stations."
+                    "An ASP.NET Core Web Api for calculating the air-line distance between German intercity train stations."
             });
             var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
             options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
