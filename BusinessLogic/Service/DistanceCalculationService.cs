@@ -44,7 +44,7 @@ public class DistanceCalculationService : IDistanceCalculationService
     }
 
 
-    // The Haversine Formula calculates the distance between to point on the earth.
+    // The Haversine Formula calculates the distance between two points on the earth.
     // This implementation is heavily inspired by https://de.martech.zone/calculate-great-circle-distance/.
     private static int CalculateHaversineDistanceInKm(TrainStation from, TrainStation to)
     {
