@@ -6,7 +6,7 @@ namespace TrainStationDistance.Mapping;
 public interface IDtoMapper
 {
     /// <summary>
-    /// Maps a DistanceCalculation object to the corresponding DistanceCalculationDto object.
+    ///     Maps a DistanceCalculation object to the corresponding DistanceCalculationDto object.
     /// </summary>
     /// <param name="distanceCalculation">DistanceCalculation to be mapped.</param>
     /// <returns>Mapped DistanceCalculationDto.</returns>

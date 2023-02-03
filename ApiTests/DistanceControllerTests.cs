@@ -41,7 +41,8 @@ public class DistanceControllerTests
         var response = sut.GetDistance("FF", "BLS");
 
         // then
-        response.Result.Should().BeOfType<OkObjectResult>().Which.StatusCode.Should().Be(StatusCodes.Status200OK);;
+        response.Result.Should().BeOfType<OkObjectResult>()
+            .Which.StatusCode.Should().Be(StatusCodes.Status200OK);
     }
 
     [Test]
@@ -56,7 +57,8 @@ public class DistanceControllerTests
         var response = sut.GetDistance("FF", "BLS");
 
         // then
-        response.Result.Should().BeOfType<NotFoundObjectResult>().Which.StatusCode.Should().Be(StatusCodes.Status404NotFound);
+        response.Result.Should().BeOfType<NotFoundObjectResult>()
+            .Which.StatusCode.Should().Be(StatusCodes.Status404NotFound);
     }
 
     private DistanceController CreateSut()

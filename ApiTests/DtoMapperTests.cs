@@ -27,7 +27,7 @@ public class DtoMapperTests
 
         // when
         var dto = sut.MapToDto(bo);
-        
+
         // then
         dto.From.Should().Be(kölnHbf);
         dto.To.Should().Be(bonnHbf);
@@ -35,7 +35,7 @@ public class DtoMapperTests
         dto.Unit.Should().Be(unit);
     }
 
-    private IDtoMapper CreateSut()
+    private static IDtoMapper CreateSut()
     {
         return new DtoMapper();
     }
