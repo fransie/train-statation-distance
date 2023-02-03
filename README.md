@@ -11,7 +11,7 @@ The air-line distance is calculated as the great-circle distance between two poi
 ```
 git clone https://github.com/fransie/train-statation-distance.git
 dotnet build
-dotnet run
+dotnet run --project Api
 ```
 
 The service will be available at https://localhost:5001/swagger/index.html.
