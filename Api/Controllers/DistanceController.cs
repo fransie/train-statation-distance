@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using TrainStationDistance.Mapping;
 using TrainStationDistance.Model;
 
 namespace TrainStationDistance.Controllers;
@@ -12,11 +13,11 @@ public class DistanceController : ControllerBase
 {
     private const string ApiVersion = "v1";
     private readonly IDistanceCalculationService _calculationService;
-    private readonly DtoMapper _dtoMapper;
+    private readonly IDtoMapper _dtoMapper;
     private readonly ILogger<DistanceController> _logger;
 
     public DistanceController(ILogger<DistanceController> logger, IDistanceCalculationService calculationService,
-        DtoMapper dtoMapper)
+        IDtoMapper dtoMapper)
     {
         _logger = logger;
         _calculationService = calculationService;
@@ -33,7 +34,7 @@ public class DistanceController : ControllerBase
     /// <response code="404">Indicates that one of the DC100Codes is invalid.</response>
     [HttpGet("distance/{from}/{to}", Name = "GetDistance")]
     [Produces("application/json")]
-    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(DistanceCalculationDto))]
+    [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public ActionResult<DistanceCalculationDto> GetDistance(string from, string to)
     {

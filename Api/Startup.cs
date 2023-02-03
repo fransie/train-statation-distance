@@ -9,7 +9,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
-using TrainStationDistance.Model;
+using TrainStationDistance.Mapping;
 
 namespace TrainStationDistance;
 
@@ -41,7 +41,7 @@ public class Startup
 
         services.AddScoped<IDistanceCalculationService, DistanceCalculationService>();
         services.AddScoped<ITrainStationRepository, TrainStationRepository>();
-        services.AddTransient<DtoMapper>();
+        services.AddTransient<IDtoMapper, DtoMapper>();
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

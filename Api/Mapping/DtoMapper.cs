@@ -1,9 +1,10 @@
 using AutoMapper;
 using BusinessLogic.Model;
+using TrainStationDistance.Model;
 
-namespace TrainStationDistance.Model;
+namespace TrainStationDistance.Mapping;
 
-public class DtoMapper
+public class DtoMapper : IDtoMapper
 {
     private readonly IMapper _mapper;
 
