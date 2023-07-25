@@ -1,5 +1,7 @@
 # Train Station Distance
 
+The goal of this project is to showcase how I would build a .NET microservice (except for the data source, which would usually be a database).
+
 This ASP.NET Core Web Api calculates the air-line distance between German intercity train stations. The locations of
 the train stations are provided by Deutsche Bahn: https://data.deutschebahn.com/dataset/data-haltestellen.html.
 This service uses the 2020 dataset.
